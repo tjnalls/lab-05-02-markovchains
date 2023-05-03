@@ -45,24 +45,17 @@ def make_chains(text_string):
     chains = {}
     tuple_list = []
 
-    for idx in range(len(text_string)-1): #hint= -2
+    for idx in range(len(text_string)-2): #hint= -2
         new_value = idx + 1
+        second_value = idx + 2
         #grab both idx+1 and idx+2
         key_tuple = (text_string[idx], text_string[new_value])
-        tuple_list.append(key_tuple)
-        
-    
-    # for tup in tuple_list:
-    #     for idx, word in enumerate(text_string):
-    #         x = idx + 1
-    #         if tup[1] == word:
-    #             chains[tup] = [text_string[x]]
-    
-    for tup in tuple_list:    
-        for idx in range(len(text_string)-1):
-            x = idx + 1
-            if tup[1] == text_string[idx]:
-                chains[tup] = [text_string[x]]
+
+        if key_tuple not in chains: 
+            chains[key_tuple]  = [text_string[second_value]]
+
+        else:
+            chains[key_tuple].append(text_string[second_value])
 
     for key, value in chains.items():
         print(key, ':', value)
@@ -73,10 +66,18 @@ def make_text(chains):
     """Return text from chains."""
 
     words = []
+    for key in chains:
+        key = [key]
 
-    # your code goes here
+    
 
-    return ' '.join(words)
+    phrase = choice(list(chains.keys()))
+    print (phrase)
+
+    # words.append()
+    # print(words)
+
+    # return ' '.join(words)
 
 
 input_path = 'green-eggs.txt'
